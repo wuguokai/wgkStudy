@@ -1,8 +1,14 @@
 package wugk.controller;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
+import wugk.domain.TestTable;
+import wugk.service.TestService;
+
+import java.util.List;
 
 /**
  * Created by WUGUOKAI on 2017/8/4.
@@ -10,8 +16,14 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping(value = "/")
 public class TestController {
-    @RequestMapping(value = "",method = RequestMethod.GET)
-    public String getTest(){
-        return "Hello Wugk!";
+    @Autowired
+    private TestService testService;
+    @RequestMapping(value = "/get",method = RequestMethod.GET)
+    public List<TestTable> getTest() {
+        return testService.getList();
+    }
+    @RequestMapping(value = "/get2",method = RequestMethod.GET)
+    public String getTest2() {
+        return "hello";
     }
 }
