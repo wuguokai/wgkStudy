@@ -20,6 +20,7 @@ public class TestController {
     private TestService testService;
     @RequestMapping(value = "/get",method = RequestMethod.GET)
     public List<TestTable> getTest() {
+        System.out.println(testService.getList());
         return testService.getList();
     }
     @RequestMapping(value = "/get2",method = RequestMethod.GET)

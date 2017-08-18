@@ -19,7 +19,7 @@ public class TestService {
     private JdbcTemplate jdbcTemplate;
     public List<TestTable> getList(){
         String sql = "select * from test_table";
-        return (List<TestTable>) jdbcTemplate.query(sql, new RowMapper<TestTable>(){
+        return jdbcTemplate.query(sql, new RowMapper<TestTable>(){
 
             @Override
             public TestTable mapRow(ResultSet rs, int rowNum) throws SQLException {
