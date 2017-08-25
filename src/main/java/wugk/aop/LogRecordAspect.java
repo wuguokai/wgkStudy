@@ -1,9 +1,7 @@
 package wugk.aop;
 
 import org.aspectj.lang.ProceedingJoinPoint;
-import org.aspectj.lang.annotation.Around;
-import org.aspectj.lang.annotation.Aspect;
-import org.aspectj.lang.annotation.Pointcut;
+import org.aspectj.lang.annotation.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.context.annotation.Configuration;
@@ -45,5 +43,17 @@ public class LogRecordAspect {
        /* String result = "Hello World!";
         logger.info("世界你好：" +result);*/
         return result;
+    }
+
+    @Before("controllerMethodPointCut()")
+    public void before() throws Throwable{
+        String before = "开始执行";
+        logger.info(before);
+    }
+
+    @After("controllerMethodPointCut()")
+    public void after() throws Throwable{
+        String after = "执行结束";
+        logger.info(after);
     }
 }
