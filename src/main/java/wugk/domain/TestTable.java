@@ -1,10 +1,18 @@
 package wugk.domain;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
 /**
  * Created by WUGUOKAI on 2017/8/4.
  */
-
+@Entity
+@Table(name = "test_table")
 public class TestTable {
+    @Id
+    @GeneratedValue
     private Long id;
     private String testName;
     private String testDesc;
