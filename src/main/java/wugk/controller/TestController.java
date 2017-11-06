@@ -1,11 +1,15 @@
 package wugk.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
+import wugk.domain.AppPojo;
+import wugk.domain.AppUpdatePojo;
 import wugk.domain.TestTable;
 import wugk.dao.JpaTestTableDao;
+import wugk.domain.User;
 import wugk.mapper.TestTableMapper;
 import wugk.service.TestService;
 
@@ -23,6 +27,13 @@ public class TestController {
     private JpaTestTableDao jpaTestTableDao;
     @Autowired
     private TestTableMapper testTableMapper;
+
+    @RequestMapping(value = "/testLink",method = RequestMethod.POST)
+    public AppUpdatePojo testLink(@RequestBody AppPojo appPojo) {
+        System.out.println(appPojo);
+        AppUpdatePojo appUpdatePojo = new AppUpdatePojo();
+        return appUpdatePojo;
+    }
 
     @RequestMapping(value = "/getjpa",method = RequestMethod.GET)
     public String jpaGetTest() {
