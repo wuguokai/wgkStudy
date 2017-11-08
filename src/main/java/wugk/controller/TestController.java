@@ -13,6 +13,9 @@ import wugk.domain.User;
 import wugk.mapper.TestTableMapper;
 import wugk.service.TestService;
 
+import javax.servlet.http.HttpServletResponse;
+import java.io.*;
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -27,6 +30,41 @@ public class TestController {
     private JpaTestTableDao jpaTestTableDao;
     @Autowired
     private TestTableMapper testTableMapper;
+
+    //文件下载
+    @RequestMapping(value = "/downloadFile",method = RequestMethod.GET)
+    public void downloadFile(HttpServletResponse res) {
+        String filePath = "C:\\Users\\WUGUOKAI\\Desktop\\Appmain.android-1.0.0.zip";
+//        res.setHeader("Content-Disposition", "attachment;filename=" + bundleVersion.getFileName());
+        byte[] buff = new byte[1024];
+        BufferedInputStream bis = null;
+        OutputStream os = null;
+        try {
+            File file = new File(filePath);
+            System.out.println(file.length());
+            res.setContentType("application/zip");
+            os = res.getOutputStream();
+            bis = new BufferedInputStream(new FileInputStream(file));
+            res.setContentLength(bis.available());
+            res.setHeader("Content-Size", String.valueOf(bis.available()));
+//            res.setHeader("Content-Length", String.valueOf(bis.available()));
+            int readLength = 0; // read()当到达文件末尾返回-1，实现连续读取写入 while
+            while ((readLength = bis.read(buff)) != -1) {
+                os.write(Arrays.copyOf(buff, readLength));
+            }
+            os.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            if (bis != null) {
+                try {
+                    bis.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+    }
 
     @RequestMapping(value = "/testLink",method = RequestMethod.POST)
     public AppUpdatePojo testLink(@RequestBody AppPojo appPojo) {

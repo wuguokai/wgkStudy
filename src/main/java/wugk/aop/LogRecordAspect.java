@@ -39,7 +39,9 @@ public class LogRecordAspect {
         logger.info("请求开始, 各个参数, url: {}, method: {}, uri: {}, params: {}", url, method, uri, queryString);
 
         Object result = pjp.proceed();
-        logger.info(result.toString());
+        if (result != null) {
+            logger.info(result.toString());
+        }
        /* String result = "Hello World!";
         logger.info("世界你好：" +result);*/
         return result;
