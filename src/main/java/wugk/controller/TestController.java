@@ -45,6 +45,7 @@ public class TestController {
             res.setContentType("application/zip");
             os = res.getOutputStream();
             bis = new BufferedInputStream(new FileInputStream(file));
+            res.setHeader("transfer-encoding", "");
             res.setContentLength(bis.available());
             res.setHeader("Content-Size", String.valueOf(bis.available()));
 //            res.setHeader("Content-Length", String.valueOf(bis.available()));
