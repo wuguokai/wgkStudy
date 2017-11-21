@@ -5,16 +5,14 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
-import wugk.domain.AppPojo;
-import wugk.domain.AppUpdatePojo;
-import wugk.domain.TestTable;
+import wugk.domain.*;
 import wugk.dao.JpaTestTableDao;
-import wugk.domain.User;
 import wugk.mapper.TestTableMapper;
 import wugk.service.TestService;
 
 import javax.servlet.http.HttpServletResponse;
 import java.io.*;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -30,6 +28,11 @@ public class TestController {
     private JpaTestTableDao jpaTestTableDao;
     @Autowired
     private TestTableMapper testTableMapper;
+
+    @RequestMapping(value = "/testPost",method = RequestMethod.POST)
+    public void testPost(@RequestBody Icons iconModels) {
+        System.out.println(iconModels);
+    }
 
     //文件下载
     @RequestMapping(value = "/downloadFile",method = RequestMethod.GET)
