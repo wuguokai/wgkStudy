@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RestController;
 import wugk.domain.*;
 import wugk.dao.JpaTestTableDao;
 import wugk.mapper.TestTableMapper;
+import wugk.rabbitmq.Sender;
 import wugk.service.TestService;
 
 import javax.servlet.http.HttpServletResponse;
@@ -28,6 +29,14 @@ public class TestController {
     private JpaTestTableDao jpaTestTableDao;
     @Autowired
     private TestTableMapper testTableMapper;
+
+    @Autowired
+    private Sender sender;
+
+    @RequestMapping(value = "/rabbitmq",method = RequestMethod.GET)
+    public void testRabbitMq() {
+        sender.send();
+    }
 
     @RequestMapping(value = "/testPost",method = RequestMethod.POST)
     public void testPost(@RequestBody Icons iconModels) {
